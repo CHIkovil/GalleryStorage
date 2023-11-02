@@ -1,0 +1,8 @@
+xcassets:
+  inputs:
+    - Sources/UIComponents/Resources/Images.xcassets
+  outputs:
+      templateName: swift5
+      output: ${DERIVED_SOURCES_DIR}/Assets+Generated.swift
+      params:
+        publicAccess: true

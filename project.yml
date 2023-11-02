@@ -1,0 +1,84 @@
+name: GalleryStorage
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9.1"
+    TARGETED_DEVICE_FAMILY: 1
+    DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+
+configs:
+  dev-debug: debug
+  prod-release: release
+
+options:
+  deploymentTarget:
+    iOS: "17.0"
+  defaultConfig: dev-debug
+  developmentLanguage: ru
+  
+packages:
+  Domain:
+    path: Packages/Domain
+  Navigation:
+    path: Packages/Navigation
+  UIComponents:
+    path: Packages/UIComponents
+    mode: 777
+  Networking:
+    path: Packages/Networking
+  Alamofire:
+    url: "https://github.com/Alamofire/Alamofire"
+    from: "5.8.1"
+  Swinject:
+    url: "https://github.com/Swinject/Swinject"
+    from: "2.8.4"
+        
+targets:
+  GalleryStorage:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: Sources
+    dependencies:
+      - package: Domain
+      - package: Navigation
+      - package: UIComponents
+      - package: Networking
+      - package: Alamofire
+      - package: Swinject
+    settings:
+      base:
+          PRODUCT_NAME: "GalleryStorage"
+          BUNDLE_DISPLAY_NAME: "GalleryStorage"
+          PRODUCT_BUNDLE_IDENTIFIER: "com.chikovil.gallerystorage"
+          TARGETED_DEVICE_FAMILY: 1
+          CURRENT_PROJECT_VERSION: 1
+    info:
+      path: Sources/Application/Info.plist
+      properties:
+        CFBundleDisplayName: $(BUNDLE_DISPLAY_NAME)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        UILaunchStoryboardName: LaunchScreen
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+          UISceneConfigurations:
+            UIWindowSceneSessionRoleApplication:
+              - UISceneConfigurationName: Default Configuration
+                UISceneDelegateClassName: $(PRODUCT_MODULE_NAME).SceneDelegate
+                
+schemes:
+  GalleryStorage:
+    build:
+      targets:
+        GalleryStorage: all
+    run:
+      config: dev-debug
+    profile:
+      config: prod-release
+    analyze:
+      config: dev-debug
+    archive:
+      config: prod-release
