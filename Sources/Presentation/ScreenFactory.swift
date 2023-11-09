@@ -10,15 +10,15 @@ import Navigation
 import UIComponents
 
 protocol ScreenFactoryProtocol {
-    func makeGallery(viewModel: GalleryVMProtocol) -> GalleryVC
+    func makeGallery(presenter: GalleryPresenterProtocol) -> GalleryVC
 }
 
 final class DefaultScreensFactory: ScreenFactoryProtocol {
     
     // MARK: - Make
     
-    func makeGallery(viewModel: GalleryVMProtocol) -> GalleryVC {
-        let vc = GalleryVC(viewModel: viewModel)
+    func makeGallery(presenter: GalleryPresenterProtocol) -> GalleryVC {
+        let vc = GalleryVC(presenter: presenter)
         return vc
     }
 }

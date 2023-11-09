@@ -11,14 +11,14 @@ import Combine
 import Domain
 
 public protocol GalleryApiProtocol {
-    func getImage(id: Int) -> AnyPublisher<Data, NetworkError>
+    func getImage(uid: String) -> AnyPublisher<Data, NetworkError>
 }
 
 public final class DefaultGalleryApi: BaseApi {
     
     private enum Endpoint: BaseEndpointApi {
         
-        case getImage(id: Int)
+        case getImage(uid: String)
         
         var method: HTTPMethod {
             switch self {
@@ -29,8 +29,8 @@ public final class DefaultGalleryApi: BaseApi {
         
         var path: String {
             switch self {
-            case .getImage(let id):
-                return "\(id)"
+            case .getImage(let uid):
+                return "\(uid)"
             }
         }
         
@@ -53,8 +53,8 @@ public final class DefaultGalleryApi: BaseApi {
 }
 
 extension DefaultGalleryApi: GalleryApiProtocol {
-    public func getImage(id: Int) -> AnyPublisher<Data, NetworkError> {
-        request(endpoint: Endpoint.getImage(id: id), response: Data.self)
+    public func getImage(uid: String) -> AnyPublisher<Data, NetworkError> {
+        request(endpoint: Endpoint.getImage(uid: uid), response: Data.self)
     }
 }
 

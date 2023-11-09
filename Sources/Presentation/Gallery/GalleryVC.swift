@@ -7,5 +7,20 @@
 
 import Foundation
 import UIComponents
+import Domain
 
-class GalleryVC: BaseGalleryVC {}
+class GalleryVC: BaseGalleryVC {
+    
+    let presenter: GalleryPresenterProtocol
+    
+    // MARK: - Init
+
+    public init(presenter: GalleryPresenterProtocol) {
+        self.presenter = presenter
+        super.init()
+    }
+    
+    override func getImages(completion: @escaping ([ImageModel]) -> Void) {
+        self.presenter.getImages(completion: completion)
+    }
+}

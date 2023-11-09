@@ -10,7 +10,7 @@ import Alamofire
 import Domain
 
 public protocol GalleryServiceProtocol {
-    func getImage(id: Int) -> AnyPublisher<ImageModel, NetworkError>
+    func getImage(uid: String) -> AnyPublisher<ImageModel, NetworkError>
 }
 
 open class DefaultGalleryService: GalleryServiceProtocol {
@@ -20,9 +20,9 @@ open class DefaultGalleryService: GalleryServiceProtocol {
         self.api = api
     }
     
-    public func getImage(id: Int) -> AnyPublisher<ImageModel, NetworkError> {
-        api.getImage(id: id)
-            .map { ImageModel(id: id, data: $0) }
+    public func getImage(uid: String) -> AnyPublisher<ImageModel, NetworkError> {
+        api.getImage(uid: uid)
+            .map { ImageModel(uid: uid, data: $0) }
             .eraseToAnyPublisher()
     }
 }

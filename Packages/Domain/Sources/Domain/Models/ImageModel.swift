@@ -8,14 +8,14 @@
 import Foundation
 
 public struct ImageModel {
-    public let id: Int
+    public let uid: String
     public let data: Data
     
     public init(
-        id: Int,
+        uid: String,
         data: Data
     ) {
-        self.id = id
+        self.uid = uid
         self.data = data
     }
 }

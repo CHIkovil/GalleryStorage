@@ -5,6 +5,7 @@
 //  Created by Nikolas on 23.10.2023.
 //
 import Navigation
+import Networking
 
 final class GalleryCoordinator:BaseCoordinator, Coordinatable {
     
@@ -32,9 +33,9 @@ private extension GalleryCoordinator {
         
         let output = GalleryOutput()
         
-        let vm = GalleryVM(output: output)
-        let vc = screenFactory.makeGallery(viewModel: vm)
+        let presenter = GalleryPresenter(output: output, galleryService: resolve(type: GalleryServiceProtocol.self))
+        let vc = screenFactory.makeGallery(presenter: presenter)
         
-        router.setRoot(module: vc)
+        router.setRoot(module: vc, hideBar: true)
     }
 }

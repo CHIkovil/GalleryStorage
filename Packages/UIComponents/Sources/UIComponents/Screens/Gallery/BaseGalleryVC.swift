@@ -11,48 +11,44 @@ import Combine
 import Domain
 
 
-public protocol GalleryVMProtocol {}
-
-
 open class BaseGalleryVC: BaseVC {
     
     // MARK: - Subviews
     
-    private lazy var imageView: UIImageView = {
-        let imageView = UIImageView(image: Asset.trollFace.image)
-        imageView.backgroundColor = .clear
-        imageView.contentMode = .scaleAspectFit
-        return imageView
+    private lazy var galleryCollectionView: UICollectionView = {
+        let layout = SelectionCollectionViewLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        
+        let v = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
+        v.backgroundColor = .clear
+        v.showsVerticalScrollIndicator = false
+        v.isPagingEnabled = false
+        v.bounces = true
+        v.contentInsetAdjustmentBehavior = .never
+        
+        return prepareForAutolayout(v)
     }()
+
     
-    private lazy var imageButton: UIButton = {
-        let button =  UIButton()
-        button.setTitle("Давай", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.setTitleColor(.black, for: .normal)
-        button.layer.cornerRadius = 20
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.black.cgColor
-        button.backgroundColor = .clear
-        return button
-    }()
-    
-    
-    // MARK: - Acts
+    // MARK: - Open acts
     
     open func getImages(completion: @escaping ([ImageModel]) -> Void) {}
     
-    // MARK: - Let
-    
-    let viewModel: GalleryVMProtocol
     
     // MARK: - Init
-
-    public init(viewModel: GalleryVMProtocol) {
-        self.viewModel = viewModel
+    
+    private var galleryCollectionDataSource: GalleryCollectionDataSource!
+    private var galleryCollectionDelegate: GalleryCollectionDelegate!
+    
+    public init() {
         super.init(nibName: nil, bundle: nil)
+        self.galleryCollectionDataSource = .init(collectionView: self.galleryCollectionView)
+        self.galleryCollectionDelegate = .init(collectionView: self.galleryCollectionView)
     }
-
+    
     @available(*, unavailable)
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -62,14 +58,25 @@ open class BaseGalleryVC: BaseVC {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
+        galleryCollectionView.register(GalleryCollectionCell.self)
+        galleryCollectionView.dataSource = galleryCollectionDataSource
+        galleryCollectionView.delegate = galleryCollectionDelegate
         bind()
     }
     
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.getImages { [weak self] result in
-            guard let self else { return }
-        }
+        
+        //Soon:
+//        self.getImages { [weak self] result in
+//            guard let self else { return }
+//        }
+        
+        let imageModels = [Asset.picture1.image.pngData(),
+                           Asset.picture2.image.pngData(),
+                           Asset.picture3.image.pngData()].map {ImageModel(uid: UUID().uuidString.lowercased(), data: $0 ?? Data())}
+        
+        galleryCollectionDataSource.reload(imageModels)
     }
     
     // MARK: - Bind
@@ -79,19 +86,14 @@ open class BaseGalleryVC: BaseVC {
     // MARK: - Setup
 
     open override func setupSubviews() {
-        view.backgroundColor = .white
+        view.backgroundColor = .black
         view.addSubviews([
-            imageView
+            galleryCollectionView
         ])
     }
     
     open override func setupAutolayout() {
-        view.addConstraints([
-            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-        
-        imageView.set(size: Size.imageSize)
+        galleryCollectionView.pin(to: view)
     }
 }
 
@@ -105,8 +107,6 @@ private extension BaseGalleryVC {
     
     struct Inset {}
     
-    struct Size {
-        static let imageSize : CGSize = .init(width: 100, height: 100)
-    }
+    struct Size {}
 }
 
