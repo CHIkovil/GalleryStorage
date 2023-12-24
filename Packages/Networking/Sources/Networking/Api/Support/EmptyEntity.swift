@@ -8,7 +8,7 @@ import Foundation
 import Alamofire
 
 public struct EmptyEntity: Codable, EmptyResponse {
-    
+
     public static func emptyValue() -> EmptyEntity {
         EmptyEntity.init()
     }

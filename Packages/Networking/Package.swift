@@ -9,12 +9,12 @@ let package = Package(
     products: [
         .library(
             name: "Networking",
-            targets: ["Networking"]),
+            targets: ["Networking"])
     ],
     dependencies: [
         .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.8.1")),
-        .package(path: "../Domain"),
-        
+        .package(path: "../Domain")
+
     ],
     targets: [
         .target(

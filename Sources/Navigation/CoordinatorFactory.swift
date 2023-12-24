@@ -14,21 +14,21 @@ protocol CoordinatorFactoryProtocol {
 }
 
 final class DefaultContractorCoordinatorFactory: CoordinatorFactoryProtocol {
-    
+
     private let screensFactory: ScreenFactoryProtocol
-    
+
     // MARK: - Init
-    
+
     init(screensFactory: ScreenFactoryProtocol) {
         self.screensFactory = screensFactory
     }
-    
+
     func makeRootCoordinator(router: Routable) -> Coordinatable {
         RootCoordinator(router: router, coordinatorFactory: self)
     }
-    
+
     func makeGalleryCoordinator(router: Routable) -> Coordinatable {
         GalleryCoordinator(router: router, screensFactory: screensFactory)
     }
-    
+
 }

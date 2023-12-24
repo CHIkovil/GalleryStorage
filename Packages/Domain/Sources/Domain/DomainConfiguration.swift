@@ -8,7 +8,7 @@
 import Swinject
 
 public struct DomainConfiguration {
-    
+
     public static var assembler: Assembler!
     public static var environment = DevEnvironment()
 }

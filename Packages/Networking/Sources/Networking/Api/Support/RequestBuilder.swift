@@ -9,22 +9,22 @@ import Alamofire
 import Domain
 
 public final class RequestBuilder {
-    
+
     private let env: Environment
     private let urlEncoding: URLEncoding
     private let jsonEncoding: JSONEncoding
     private let jsonEncoder: JSONEncoder
-    
+
     private var host: String {
         env.host
     }
-    
+
     private var urlParameters: Parameters {
         [:]
     }
 
     // MARK: - Init
-    
+
     public init(
         environment: Environment,
         urlEncoding: URLEncoding,
@@ -36,9 +36,9 @@ public final class RequestBuilder {
         self.jsonEncoding = jsonEncoding
         self.jsonEncoder = jsonEncoder
     }
-    
+
     // MARK: - Build
-    
+
     func build<T: Encodable>(
         path: String,
         method: HTTPMethod,
@@ -56,7 +56,7 @@ public final class RequestBuilder {
             headers: headers
         )
     }
-    
+
     func build(
          path: String,
          method: HTTPMethod,
@@ -68,24 +68,24 @@ public final class RequestBuilder {
             urlParameters ?? [:],
             uniquingKeysWith: { _, value in value }
         )
-        
+
         var urlRequest = URL(string: host)
             .map { $0.appendingPathComponent(path) }
             .flatMap { try? urlEncoding.encode(URLRequest(url: $0), with: urlParameters) }
-        
+
         if let jsonParameters {
             urlRequest = urlRequest
                 .flatMap { try? jsonEncoding.encode($0, with: jsonParameters) }
         }
-        
+
         urlRequest?.method = method
-        
+
         if let headers = headers {
             urlRequest?.headers = headers
         }
-        
+
         urlRequest?.cachePolicy = .reloadIgnoringLocalCacheData
-        
+
         return urlRequest
     }
 }

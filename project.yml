@@ -23,7 +23,6 @@ packages:
     path: Packages/Navigation
   UIComponents:
     path: Packages/UIComponents
-    mode: 777
   Networking:
     path: Packages/Networking
   Alamofire:
@@ -47,6 +46,9 @@ targets:
       - package: Networking
       - package: Alamofire
       - package: Swinject
+    preBuildScripts:
+      - path: Scripts/swiftlint.sh
+        name: "SwiftLint"
     settings:
       base:
           PRODUCT_NAME: "GalleryStorage"

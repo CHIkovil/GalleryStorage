@@ -13,6 +13,6 @@ public protocol Environment {
 
 public struct DevEnvironment: Environment {
     public var host = "http://localhost:666/"
-    
+
     public init() {}
 }

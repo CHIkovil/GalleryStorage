@@ -14,25 +14,23 @@ public protocol GalleryPresenterServiceProtocol {
     func getImages(completion: @escaping ([ImageModel]) -> Void)
 }
 
-
 struct GalleryOutput {}
 
 final class GalleryPresenter {
     private let output: GalleryOutput
     private let galleryService: GalleryServiceProtocol
     private var cancellables = Set<AnyCancellable>()
-    
+
     init(output: GalleryOutput, galleryService: GalleryServiceProtocol) {
         self.output = output
         self.galleryService = galleryService
     }
 }
 
-//MARK: GalleryPresenterServiceProtocol
+// MARK: GalleryPresenterServiceProtocol
 
 extension GalleryPresenter: GalleryPresenterServiceProtocol {
     func getImages(completion: @escaping ([ImageModel]) -> Void) {
        // Soon:
     }
 }
-

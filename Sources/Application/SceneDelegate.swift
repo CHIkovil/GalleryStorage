@@ -13,7 +13,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     fileprivate lazy var coordinator: Coordinatable = self.makeCoordinator()
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -60,17 +59,16 @@ private extension SceneDelegate {
     func makeCoordinator() -> Coordinatable {
         let rootController = UINavigationController()
         window?.rootViewController = rootController
-        
+
         let coordinatorFactory = resolve(type: CoordinatorFactoryProtocol.self)
         let router = DefaultRouter(rootController: rootController)
         let coordinator = coordinatorFactory.makeRootCoordinator(router: router)
-        
+
         return coordinator
     }
-    
+
     func willConnectToSession(window: UIWindow) {
         window.makeKeyAndVisible()
         coordinator.start()
     }
 }
-

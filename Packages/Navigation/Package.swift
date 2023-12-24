@@ -9,7 +9,7 @@ let package = Package(
     products: [
         .library(
             name: "Navigation",
-            targets: ["Navigation"]),
+            targets: ["Navigation"])
     ],
     dependencies: [],
     targets: [

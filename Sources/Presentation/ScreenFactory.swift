@@ -14,12 +14,11 @@ protocol ScreenFactoryProtocol {
 }
 
 final class DefaultScreensFactory: ScreenFactoryProtocol {
-    
+
     // MARK: - Make
-    
+
     func makeGallery(presenter: GalleryPresenterProtocol) -> GalleryVC {
         let vc = GalleryVC(presenter: presenter)
         return vc
     }
 }
-

@@ -9,9 +9,9 @@ import Swinject
 import Foundation
 
 final class JSONEncoderAssembly: Assembly {
-    
+
     func assemble(container: Container) {
-        container.register(JSONEncoder.self) { resolver in
+        container.register(JSONEncoder.self) { _ in
             JSONEncoder()
         }
     }

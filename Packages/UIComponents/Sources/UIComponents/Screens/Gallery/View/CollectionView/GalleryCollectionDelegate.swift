@@ -8,11 +8,10 @@
 import Foundation
 import UIKit
 
-
 public final class GalleryCollectionDelegate: NSObject {
-    
+
     private unowned var collectionView: UICollectionView
-    
+
     public init(
         collectionView: UICollectionView
     ) {
@@ -32,7 +31,7 @@ extension GalleryCollectionDelegate: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.35)
     }
-    
+
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }

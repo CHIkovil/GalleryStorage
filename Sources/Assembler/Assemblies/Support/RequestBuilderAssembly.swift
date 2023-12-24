@@ -10,7 +10,7 @@ import Networking
 import Domain
 
 final class RequestBuilderAssembly: Assembly {
-    
+
     func assemble(container: Container) {
         container.register(RequestBuilder.self) { resolver in
             RequestBuilder(

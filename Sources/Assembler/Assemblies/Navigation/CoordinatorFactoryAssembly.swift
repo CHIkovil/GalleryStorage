@@ -8,7 +8,7 @@
 import Swinject
 
 final class CoordinatorFactoryAssembly: Assembly {
-    
+
     func assemble(container: Container) {
         container.register(CoordinatorFactoryProtocol.self) { resolver in
             DefaultContractorCoordinatorFactory(screensFactory: <~resolver)

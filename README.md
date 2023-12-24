@@ -1,2 +1,1 @@
 # ImageStorage
-:floppy_disk:

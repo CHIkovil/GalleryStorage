@@ -9,12 +9,12 @@ import Foundation
 import Swinject
 
 final class JSONDecoderAssembly: Assembly {
-    
+
     func assemble(container: Container) {
-        container.register(JSONDecoder.self) { resolver in
+        container.register(JSONDecoder.self) { _ in
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
-            
+
             return decoder
         }
     }

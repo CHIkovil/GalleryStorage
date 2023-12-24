@@ -8,9 +8,9 @@ import Swinject
 import Alamofire
 
 final class URLEncodingAssembly: Assembly {
-    
+
     func assemble(container: Container) {
-        container.register(URLEncoding.self) { resolver in
+        container.register(URLEncoding.self) { _ in
             URLEncoding()
         }
     }

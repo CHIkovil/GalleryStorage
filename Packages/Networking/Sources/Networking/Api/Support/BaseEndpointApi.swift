@@ -8,7 +8,7 @@ import Foundation
 import Alamofire
 
 public protocol BaseEndpointApi {
-    
+
     var method: HTTPMethod { get }
     var path: String { get }
     var pathPrefix: String { get }
@@ -23,19 +23,19 @@ public protocol BaseEndpointApi {
 }
 
 extension BaseEndpointApi {
-    
+
     var fullPath: String {
         "\(pathPrefix == "" ? "": pathPrefix + "/")\(path)"
     }
-    
+
     func urlParameters(encoder: JSONEncoder) -> Parameters? {
         urlModel?.parameters(encoder: encoder)
     }
-    
+
     func jsonParameters(encoder: JSONEncoder) -> Parameters? {
         jsonModel?.parameters(encoder: encoder)
     }
-    
+
     func urlRequest(builder: RequestBuilder, encoder: JSONEncoder) -> URLRequest? {
         builder.build(
             path: fullPath,
@@ -46,4 +46,3 @@ extension BaseEndpointApi {
         )
     }
 }
-

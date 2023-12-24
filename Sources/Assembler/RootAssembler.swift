@@ -8,7 +8,7 @@
 import Swinject
 
 public struct RootAssembler {
-    
+
     // MARK: - Assemblies
     private static var apiAssemblies: [Assembly] {
         [
@@ -19,29 +19,29 @@ public struct RootAssembler {
             RequestBuilderAssembly(),
             ApiLoggerAssembly(),
             SessionAssembly(),
-            GalleryApiAssembly(),
+            GalleryApiAssembly()
         ]
     }
-    
+
     private static var servicesAssemblies: [Assembly] {
         [
             LoggerAssembly(),
             GalleryServiceAssembly()
         ]
     }
-    
+
     private static var presentationAssemblies: [Assembly] {
         [
             ScreensFactoryAssembly()
         ]
     }
-    
+
     private static var navigationAssemblies: [Assembly] {
         [
             CoordinatorFactoryAssembly()
         ]
     }
-    
+
     private static var assemblies: [Assembly] {
         apiAssemblies
             + servicesAssemblies
@@ -49,12 +49,12 @@ public struct RootAssembler {
             + navigationAssemblies
     }
     // MARK: - Singleton
-    
+
     public static let shared: Assembler = {
         let assembler = Assembler(assemblies)
         return assembler
     }()
-    
+
     private init() {}
 }
 

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 public extension UICollectionView {
-    
+
     func dequeue<T: AnyObject>(
         cell cellType: T.Type,
         for indexPath: IndexPath

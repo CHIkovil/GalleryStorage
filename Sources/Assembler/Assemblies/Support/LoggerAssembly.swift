@@ -10,9 +10,9 @@ import Foundation
 import os
 
 final class LoggerAssembly: Assembly {
-    
+
     func assemble(container: Container) {
-        container.register(Logger.self) { resolver in
+        container.register(Logger.self) { _ in
             Logger()
         }
     }

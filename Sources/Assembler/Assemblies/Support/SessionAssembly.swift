@@ -11,7 +11,7 @@ import Alamofire
 import Networking
 
 final class SessionAssembly: Assembly {
-    
+
     func assemble(container: Container) {
         container.register(Session.self) { resolver in
             let apiLogger: ApiLogger = <~resolver

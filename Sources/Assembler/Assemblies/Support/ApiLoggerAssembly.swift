@@ -10,7 +10,7 @@ import Networking
 import os
 
 final class ApiLoggerAssembly: Assembly {
-    
+
     func assemble(container: Container) {
         container.register(ApiLogger.self) { resolver in
             ApiLogger(logger: <~resolver)

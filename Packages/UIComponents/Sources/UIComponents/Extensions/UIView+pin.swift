@@ -8,7 +8,7 @@
 import UIKit
 
 public extension UIView {
-    
+
     // MARK: - Edge
 
     enum Edge {
@@ -17,13 +17,13 @@ public extension UIView {
         case leading
         case trailing
     }
-    
+
     // MARK: - Pin
-    
+
     func pin(to view: UIView, inset: CGFloat = 0, toSafeArea: Bool = false) {
         pin(edges: [.top, .bottom, .leading, .trailing], to: view, inset: inset, toSafeArea: toSafeArea)
     }
-    
+
     func pin(
         edges: [Edge],
         to view: UIView,
@@ -40,7 +40,7 @@ public extension UIView {
             toSafeArea: toSafeArea
         )
     }
-    
+
     func pin(
         edges: [Edge],
         to view: UIView,
@@ -82,10 +82,8 @@ public extension UIView {
                     )
                 )
             }
-            
+
             view.addConstraints(constraints)
         }
     }
 }
-
-

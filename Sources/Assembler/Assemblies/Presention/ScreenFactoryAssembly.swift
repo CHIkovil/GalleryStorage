@@ -8,9 +8,9 @@
 import Swinject
 
 final class ScreensFactoryAssembly: Assembly {
-    
+
     func assemble(container: Container) {
-        container.register(ScreenFactoryProtocol.self) { resolver in
+        container.register(ScreenFactoryProtocol.self) { _ in
             DefaultScreensFactory()
         }
     }

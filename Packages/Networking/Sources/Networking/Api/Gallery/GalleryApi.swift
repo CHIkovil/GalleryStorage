@@ -15,37 +15,37 @@ public protocol GalleryApiProtocol {
 }
 
 public final class DefaultGalleryApi: BaseApi {
-    
+
     private enum Endpoint: BaseEndpointApi {
-        
+
         case getImage(uid: String)
-        
+
         var method: HTTPMethod {
             switch self {
             case .getImage:
                 return .get
             }
         }
-        
+
         var path: String {
             switch self {
             case .getImage(let uid):
                 return "\(uid)"
             }
         }
-        
+
         var pathPrefix: String {
             "api/"
         }
-        
+
         var jsonModel: Encodable? {
             return nil
         }
-        
+
         var urlModel: Encodable? {
             nil
         }
-        
+
         var headers: HTTPHeaders? {
             nil
         }
@@ -57,4 +57,3 @@ extension DefaultGalleryApi: GalleryApiProtocol {
         request(endpoint: Endpoint.getImage(uid: uid), response: Data.self)
     }
 }
-

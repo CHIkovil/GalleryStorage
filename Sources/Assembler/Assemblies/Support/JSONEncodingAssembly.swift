@@ -9,9 +9,9 @@ import Swinject
 import Alamofire
 
 final class JSONEncodingAssembly: Assembly {
-    
+
     func assemble(container: Container) {
-        container.register(JSONEncoding.self) { resolver in
+        container.register(JSONEncoding.self) { _ in
             JSONEncoding()
         }
     }

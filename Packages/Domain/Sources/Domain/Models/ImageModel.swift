@@ -10,7 +10,7 @@ import Foundation
 public struct ImageModel {
     public let uid: String
     public let data: Data
-    
+
     public init(
         uid: String,
         data: Data
