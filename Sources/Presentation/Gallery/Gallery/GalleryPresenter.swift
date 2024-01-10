@@ -7,6 +7,7 @@
 import Combine
 import Domain
 import Networking
+import UIComponents
 
 typealias GalleryPresenterProtocol = (GalleryPresenterServiceProtocol)
 
@@ -30,6 +31,7 @@ final class GalleryPresenter {
 // MARK: GalleryPresenterServiceProtocol
 
 extension GalleryPresenter: GalleryPresenterServiceProtocol {
+
     func getImages(completion: @escaping ([ImageModel]) -> Void) {
        // Soon:
     }

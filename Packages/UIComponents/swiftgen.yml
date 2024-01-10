@@ -6,3 +6,11 @@ xcassets:
       output: ${DERIVED_SOURCES_DIR}/Assets+Generated.swift
       params:
         publicAccess: true
+
+fonts:
+  inputs: Sources/UIComponents/Resources/Fonts
+  outputs:
+    templateName: swift5
+    output: ${DERIVED_SOURCES_DIR}/Fonts+Generated.swift
+    params:
+        publicAccess: true

@@ -31,6 +31,9 @@ packages:
   Swinject:
     url: "https://github.com/Swinject/Swinject"
     from: "2.8.4"
+  BottomSheet:
+    url: "https://github.com/joomcode/BottomSheet"
+    from: "2.0.4"
         
 targets:
   GalleryStorage:
@@ -46,9 +49,10 @@ targets:
       - package: Networking
       - package: Alamofire
       - package: Swinject
-    preBuildScripts:
-      - path: Scripts/swiftlint.sh
-        name: "SwiftLint"
+      - package: BottomSheet
+#    preBuildScripts:
+#      - path: Scripts/swiftlint.sh
+#        name: "SwiftLint"
     settings:
       base:
           PRODUCT_NAME: "GalleryStorage"

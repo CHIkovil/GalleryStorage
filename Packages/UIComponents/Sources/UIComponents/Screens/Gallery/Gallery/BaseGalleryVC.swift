@@ -31,11 +31,23 @@ open class BaseGalleryVC: BaseVC {
         return prepareForAutolayout(view)
     }()
 
+    private lazy var updaterButton: UIButton = {
+        let view = UIButton()
+        let icon = Asset.plus.image.withRenderingMode(.alwaysTemplate)
+        view.setImage(icon, for: .normal)
+        view.tintColor = .white
+        view.alpha = 0.5
+        return view
+    }()
+
     // MARK: - Open acts
 
     open func getImages(completion: @escaping ([ImageModel]) -> Void) {}
+    open func moveToUpdater() {}
 
     // MARK: - Init
+
+    private var cancellables = Set<AnyCancellable>()
 
     private var galleryCollectionDataSource: GalleryCollectionDataSource!
     private var galleryCollectionDelegate: GalleryCollectionDelegate!
@@ -58,7 +70,6 @@ open class BaseGalleryVC: BaseVC {
         galleryCollectionView.register(GalleryCollectionCell.self)
         galleryCollectionView.dataSource = galleryCollectionDataSource
         galleryCollectionView.delegate = galleryCollectionDelegate
-        bind()
     }
 
     open override func viewWillAppear(_ animated: Bool) {
@@ -78,20 +89,34 @@ open class BaseGalleryVC: BaseVC {
 
     // MARK: - Bind
 
-    open override func bind() {}
+    open override func bind() {
+        updaterButton
+            .publisher(for: .touchUpInside)
+            .sink { [weak self] _ in
+                guard let self else { return }
+                self.moveToUpdater()
+            }
+            .store(in: &cancellables)
+    }
 
     // MARK: - Setup
 
     open override func setupSubviews() {
         view.backgroundColor = .black
         view.addSubviews([
-            galleryCollectionView
+            galleryCollectionView,
+            updaterButton
         ])
     }
 
     open override func setupAutolayout() {
         galleryCollectionView.pin(to: view)
+
+        updaterButton.pin(edges: [.top, .trailing], to: view, inset: Inset.updaterButtonIndent, toSafeArea: true)
+        updaterButton.set(size: Size.updaterButtonSize)
     }
+
+    open override func updateAppearance() {}
 }
 
 // MARK: - Private acts
@@ -102,7 +127,11 @@ private extension BaseGalleryVC {}
 
 private extension BaseGalleryVC {
 
-    struct Inset {}
+    struct Inset {
+        static let updaterButtonIndent: CGFloat = 20
+    }
 
-    struct Size {}
+    struct Size {
+        static let updaterButtonSize: CGSize = .init(width: 45, height: 45)
+    }
 }
